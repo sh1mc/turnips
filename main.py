@@ -39,7 +39,7 @@ async def on_message(message):
             if os.path.exists(datapath):
                 with open(datapath, 'r') as f:
                     data = json.load(f)
-            data['date'] = datetime.date.today().weekday()
+            data['day'] = datetime.date.today().weekday()
             if message.author.name in data:
                 data[message.author.name][ampm] = price
             else:
