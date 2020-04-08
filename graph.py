@@ -54,5 +54,4 @@ def graph():
     ax.legend()
     plt.savefig("./img/a.png", dpi=300)
     plt.clf()
-
-graph()
+    
