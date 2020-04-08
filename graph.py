@@ -14,7 +14,6 @@ import json
 
 def graph():
     today = datetime.date.today()
-    datapath = './data/' + (str)(today) + '.json'
     data = []
     days = (datetime.date.today().weekday() + 1) % 7 + 1
     for i in range(days):
@@ -42,8 +41,12 @@ def graph():
                 if 'pm' in d[n]:
                     y.append(d[n]['pm'])
                     x.append(i)
+            else:
+                i += 2
         print(y)
-        plt.plot(x, y)
+        plt.plot(x, y, label=n)
+        
+    plt.legend()
     plt.savefig("./img/a.png")
 
 graph()

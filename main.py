@@ -4,6 +4,7 @@ from collections import OrderedDict
 import re
 import datetime
 import os
+from . import graph
 
 keys = {}
 with open('./keys.json', 'r') as f:
@@ -21,6 +22,7 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+    
     if message.content.startswith('午'):
         ampm = ''
         if message.content.startswith('午前'):
@@ -49,7 +51,9 @@ async def on_message(message):
             await message.channel.send('おｋ')
         else:
             await message.channel.send('ダメです、お前の報告はおかしい')
-    return
+    
+    if message.content.startswith('グラフ見せろ'):
+        graph.graph()
 
 
 client.run(keys['token'])
