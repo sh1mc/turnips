@@ -25,7 +25,7 @@ async def on_message(message):
     
     if message.content.startswith('午'):
         ampm = ''
-        if message.content.startswith('午前'):
+        if message.content.startswith('午前') or message.content.startswith('買値'):
             ampm = 'am'
         elif message.content.startswith('午後'):
             ampm = 'pm'
