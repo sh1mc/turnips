@@ -52,7 +52,7 @@ async def on_message(message):
         else:
             await message.channel.send('ダメです、お前の報告はおかしい')
     
-    if message.content.startswith('グラフ見せろ'):
+    if message.content.startswith('グラフ'):
         graph.graph()
         await message.channel.send(file=discord.File('./img/a.png'))
 
