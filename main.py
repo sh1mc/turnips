@@ -23,7 +23,7 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    if message.content.startswith('午'):
+    if message.content.startswith('午') or message.content.startswith('買値'):
         ampm = ''
         if message.content.startswith('午前') or message.content.startswith('買値'):
             ampm = 'am'
