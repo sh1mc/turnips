@@ -13,6 +13,12 @@ import json
 # plt.savefig("./img/a.png")
 
 def graph():
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.set_xticks(numpy.linspace(1, 15, 8))
+    ax.set_xticklabels(['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'])
+    ax.set_xlim(0.5, 14.5)
+    
     today = datetime.date.today()
     data = []
     days = (datetime.date.today().weekday() + 1) % 7 + 1
@@ -44,8 +50,9 @@ def graph():
             else:
                 i += 2
         print(y)
-        plt.plot(x, y, label=n)
-        
-    plt.legend()
-    plt.savefig("./img/a.png")
+        ax.plot(x, y, label=n, marker='o') 
+    ax.legend()
+    plt.savefig("./img/a.png", dpi=300)
     plt.clf()
+
+graph()
