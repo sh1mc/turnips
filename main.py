@@ -4,7 +4,7 @@ from collections import OrderedDict
 import re
 import datetime
 import os
-from . import graph
+import graph
 
 keys = {}
 with open('./keys.json', 'r') as f:
@@ -54,6 +54,7 @@ async def on_message(message):
     
     if message.content.startswith('グラフ見せろ'):
         graph.graph()
+        await message.channel.send(file=discord.File('./img/a.png'))
 
 
 client.run(keys['token'])

@@ -48,5 +48,4 @@ def graph():
         
     plt.legend()
     plt.savefig("./img/a.png")
-
-graph()
+    plt.clf()
