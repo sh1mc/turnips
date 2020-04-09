@@ -4,6 +4,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import datetime
 import json
+import os
 
 # x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 # y = [97, 80, 78, 72, 68, 65, 60, 102, 153, 184, 210, 100, 111]
@@ -24,8 +25,10 @@ def graph():
     days = (datetime.date.today().weekday() + 1) % 7 + 1
     for i in range(days):
         td = datetime.timedelta(days=i)
-        with open('./data/' + (str)(today - td) + '.json') as f:
-            data.append(json.load(f))
+        path = './data/' + (str)(today - td) + '.json'
+        if os.path.exists(path):
+            with open(path) as f:
+                data.append(json.load(f))
     data.reverse()
     print(data)
     names = set()
