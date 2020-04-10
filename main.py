@@ -50,7 +50,7 @@ async def on_message(message):
                 json.dump(data, f, indent=4, ensure_ascii=False)
             await message.channel.send('おｋ')
         else:
-            await message.channel.send('ダメです、お前の報告はおかしい')
+            await message.channel.send('ダメです')
     
     if message.content.startswith('グラフ'):
         graph.graph()

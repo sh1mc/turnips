@@ -29,6 +29,8 @@ def graph():
         if os.path.exists(path):
             with open(path) as f:
                 data.append(json.load(f))
+        else:
+            data.append({})
     data.reverse()
     print(data)
     names = set()
