@@ -5,6 +5,7 @@ import re
 import datetime
 import os
 import graph
+import time
 
 keys = {}
 with open('./keys.json', 'r') as f:
@@ -55,6 +56,21 @@ async def on_message(message):
     if message.content.startswith('グラフ'):
         graph.graph()
         await message.channel.send(file=discord.File('./img/a.png'))
+    
+    if re.match(r'^.*(玉音放送|gyokuon|itumizu|学位|大場|おおば).*$', message.content):
+        await gyokuon()
 
+@client.event
+async def on_raw_reaction_add(reaction):
+    if reaction.emoji.name == "gyokuon":
+        await gyokuon()
+
+async def gyokuon():
+    await client.change_presence(activity=discord.Game(name='玉音放送'))
+    voice = await discord.VoiceChannel.connect(client.get_channel(keys['gyokuon']))
+    voice.play(discord.FFmpegPCMAudio('gyokuon.mp3'))
+    time.sleep(40)
+    await voice.disconnect()
+    await client.change_presence(activity=None)
 
 client.run(keys['token'])
