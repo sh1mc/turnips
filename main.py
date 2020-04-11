@@ -59,6 +59,9 @@ async def on_message(message):
     
     if re.match(r'^.*(玉音放送|gyokuon|itumizu|学位|大場|おおば).*$', message.content):
         await gyokuon()
+    
+    if client.get_user(keys['i']) in message.mentions:
+        await gyokuon()
 
 @client.event
 async def on_raw_reaction_add(reaction):
