@@ -26,29 +26,25 @@ def graph():
     for i in range(days):
         td = datetime.timedelta(days=i)
         path = './data/' + (str)(today - td) + '.json'
-        if os.path.exists(path):
-            with open(path) as f:
-                data.append(json.load(f))
-        else:
-            d = {}
-            childpath = [
-                '../../turnips/data/' + (str)(today - td) + '.json',
-                '../../bei/turnips/data/' + (str)(today - td) + '.json',
-                '../../shim/turnips/data/' + (str)(today - td) + '.json'
-            ]
-            if os.path.exists(childpath[0]):
-                with open(childpath[0]) as f:
-                    d.update(json.load(f))
-            if os.path.exists(childpath[1]):
-                with open(childpath[1]) as f:
-                    d.update(json.load(f))
-            if os.path.exists(childpath[2]):
-                with open(childpath[2]) as f:
-                    d.update(json.load(f))
-            print(d)
-            with open(path, 'w') as f:
-                json.dump(d, f, indent=4, ensure_ascii=False)
-            data.append(d)
+        d = {}
+        childpath = [
+            '../../turnips/data/' + (str)(today - td) + '.json',
+            '../../bei/turnips/data/' + (str)(today - td) + '.json',
+            '../../shim/turnips/data/' + (str)(today - td) + '.json'
+        ]
+        if os.path.exists(childpath[0]):
+            with open(childpath[0]) as f:
+                d.update(json.load(f))
+        if os.path.exists(childpath[1]):
+            with open(childpath[1]) as f:
+                d.update(json.load(f))
+        if os.path.exists(childpath[2]):
+            with open(childpath[2]) as f:
+                d.update(json.load(f))
+        print(d)
+        with open(path, 'w') as f:
+            json.dump(d, f, indent=4, ensure_ascii=False)
+        data.append(d)
     data.reverse()
     print(data)
     names = set()
