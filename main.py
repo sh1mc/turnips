@@ -25,7 +25,8 @@ async def on_message(message):
     
     if message.content.startswith('全部見せて'):
         res = re.search('[1-9][0-9]*', message.content)
-        weeksago = (int)(res.group())
+        if weeksago is not None:
+            weeksago = (int)(res.group())
         graph.graph(weeksago)
         await message.channel.send(file=discord.File('./img/a.png'))
 
