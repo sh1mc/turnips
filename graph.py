@@ -13,7 +13,7 @@ import os
 
 # plt.savefig("./img/a.png")
 
-def graph():
+def graph(weeksago):
     fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.set_xticks(numpy.linspace(1, 15, 8))
@@ -21,6 +21,9 @@ def graph():
     ax.set_xlim(0.5, 14.5)
     
     today = datetime.date.today()
+    if weeksago is not None:
+        today -= datetime.timedelta(days=weeksago*7)
+        today += datetime.timedelta(days=6-today.weekday())
     data = []
     days = (datetime.date.today().weekday() + 1) % 7 + 1
     for i in range(days):
