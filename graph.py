@@ -30,7 +30,19 @@ def graph():
             with open(path) as f:
                 data.append(json.load(f))
         else:
-            data.append({})
+            d = {}
+            if os.path.exists('../../turnips/data/' + (str)(today - td) + 'json'):
+                with open(path) as f:
+                    d.update(json.load(f))
+            if os.path.exists('../../bei/turnips/data/' + (str)(today - td) + 'json'):
+                with open(path) as f:
+                    d.update(json.load(f))
+            if os.path.exists('../../shim/turnips/data/' + (str)(today - td) + 'json'):
+                with open(path) as f:
+                    d.update(json.load(f))
+            with open(path, 'w') as f:
+                json.dump(d, f, indent=4, ensure_ascii=False)
+            data.append(d)
     data.reverse()
     print(data)
     names = set()
