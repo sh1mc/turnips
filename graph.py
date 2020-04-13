@@ -25,7 +25,7 @@ def graph(weeksago):
         today -= datetime.timedelta(days=weeksago*7)
         today += datetime.timedelta(days=6-today.weekday())
     data = []
-    days = (datetime.date.today().weekday() + 1) % 7 + 1
+    days = (today.weekday() + 1) % 7 + 1
     for i in range(days):
         td = datetime.timedelta(days=i)
         path = './data/' + (str)(today - td) + '.json'
