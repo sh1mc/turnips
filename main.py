@@ -55,14 +55,16 @@ async def on_message(message):
     
     if message.content.startswith('グラフ'):
         nums = []
-        nums.append(re.findall('[1-9][0-9]*', message.content))
-        today = datetime.now()
+        nums.extend(re.findall('\D[1-9][0-9]*', message.content))
+        for i in range(len(nums)):
+            nums[i] = (int)(re.search('[1-9][0-9]*', nums[i]).group())
+        today = datetime.date.today()
         if len(nums) == 3:
-            today = datetime.datetime(nums[0], nums[1], nums[2])
-            today += datetime.timedelta(days=(5 - today.weekday) % 7)
+            today = datetime.date(nums[0], nums[1], nums[2])
+            today += datetime.timedelta(days=(5 - today.weekday()) % 7)
         if len(nums) == 2:
-            today = datetime.datetime(datetime.now().year, nums[0], nums[1])
-            today += datetime.timedelta(days=(5 - today.weekday) % 7)
+            today = datetime.date(datetime.date.today().year, nums[0], nums[1])
+            today += datetime.timedelta(days=(5 - today.weekday()) % 7)
         graph.graph(today)
         await message.channel.send(file=discord.File('./img/a.png'))
 
