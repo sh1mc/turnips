@@ -5,6 +5,7 @@ import re
 import datetime
 import os
 import graph
+import datetime
 
 keys = {}
 with open('./keys.json', 'r') as f:
@@ -53,7 +54,16 @@ async def on_message(message):
             await message.channel.send('ダメです')
     
     if message.content.startswith('グラフ'):
-        graph.graph()
+        nums = []
+        nums.append(re.findall('[1-9][0-9]*', message.content))
+        today = datetime.now()
+        if len(nums) == 3:
+            today = datetime.datetime(nums[0], nums[1], nums[2])
+            today += datetime.timedelta(days=(5 - today.weekday) % 7)
+        if len(nums) == 2:
+            today = datetime.datetime(datetime.now().year, nums[0], nums[1])
+            today += datetime.timedelta(days=(5 - today.weekday) % 7)
+        graph.graph(today)
         await message.channel.send(file=discord.File('./img/a.png'))
 
 

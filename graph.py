@@ -13,16 +13,14 @@ import os
 
 # plt.savefig("./img/a.png")
 
-def graph():
+def graph(today):
     fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.set_xticks(numpy.linspace(1, 15, 8))
     ax.set_xticklabels(['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'])
     ax.set_xlim(0.5, 14.5)
-    
-    today = datetime.date.today()
     data = []
-    days = (datetime.date.today().weekday() + 1) % 7 + 1
+    days = (today.weekday() + 1) % 7 + 1
     for i in range(days):
         td = datetime.timedelta(days=i)
         path = './data/' + (str)(today - td) + '.json'
