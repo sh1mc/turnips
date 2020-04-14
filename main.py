@@ -5,6 +5,7 @@ import re
 import datetime
 import os
 import graph
+import datetime
 import time
 
 keys = {}
@@ -54,7 +55,18 @@ async def on_message(message):
             await message.channel.send('ダメです')
     
     if message.content.startswith('グラフ'):
-        graph.graph()
+        nums = []
+        nums.extend(re.findall('\D[1-9][0-9]*', message.content))
+        for i in range(len(nums)):
+            nums[i] = (int)(re.search('[1-9][0-9]*', nums[i]).group())
+        today = datetime.date.today()
+        if len(nums) == 3:
+            today = datetime.date(nums[0], nums[1], nums[2])
+            today += datetime.timedelta(days=(5 - today.weekday()) % 7)
+        if len(nums) == 2:
+            today = datetime.date(datetime.date.today().year, nums[0], nums[1])
+            today += datetime.timedelta(days=(5 - today.weekday()) % 7)
+        graph.graph(today)
         await message.channel.send(file=discord.File('./img/a.png'))
     
     if re.match(r'^.*(玉音放送|gyokuon|itumizu|学位|大場|おおば).*$', message.content):
