@@ -55,9 +55,9 @@ async def on_message(message):
     
     if message.content.startswith('グラフ'):
         nums = []
-        nums.extend(re.findall('\D[1-9][0-9]*', message.content))
+        nums.extend(re.findall(r'\D[1-9][0-9]*', message.content))
         for i in range(len(nums)):
-            nums[i] = (int)(re.search('[1-9][0-9]*', nums[i]).group())
+            nums[i] = (int)(re.search(r'[1-9][0-9]*', nums[i]).group())
         today = datetime.date.today()
         if len(nums) == 3:
             today = datetime.date(nums[0], nums[1], nums[2])
