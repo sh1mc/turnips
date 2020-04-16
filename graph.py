@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import datetime
 import json
 import os
+import glob
 
 # x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 # y = [97, 80, 78, 72, 68, 65, 60, 102, 153, 184, 210, 100, 111]
@@ -35,15 +36,10 @@ def graph(weeksago):
             '../../bei/turnips/data/' + (str)(today - td) + '.json',
             '../../shim/turnips/data/' + (str)(today - td) + '.json'
         ]
-        if os.path.exists(childpath[0]):
-            with open(childpath[0]) as f:
-                d.update(json.load(f))
-        if os.path.exists(childpath[1]):
-            with open(childpath[1]) as f:
-                d.update(json.load(f))
-        if os.path.exists(childpath[2]):
-            with open(childpath[2]) as f:
-                d.update(json.load(f))
+        for c in childpath:
+            if os.path.exists(c):
+                with open(c) as f:
+                    d.update(json.load(f))
         print(d)
         with open(path, 'w') as f:
             json.dump(d, f, indent=4, ensure_ascii=False)
@@ -73,7 +69,6 @@ def graph(weeksago):
                 i += 2
         print(y)
         ax.plot(x, y, label=n, marker='o') 
-    ax.legend()
+    # ax.legend()
     plt.savefig("./img/a.png", dpi=300)
     plt.clf()
-    
