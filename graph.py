@@ -25,7 +25,7 @@ def graph(weeksago):
     if weeksago is not None:
         today -= datetime.timedelta(days=weeksago*7)
         today += datetime.timedelta(days=6 - (today.weekday() + 1) % 7)
-    for i in range(weeksago + 1)
+    for i in range(weeksago + 1):
         data = []
         days = (today.weekday() + 1) % 7 + 1
         for i in range(days):
