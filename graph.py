@@ -25,6 +25,8 @@ def graph(weeksago):
     if weeksago is not None:
         today -= datetime.timedelta(days=weeksago*7)
         today += datetime.timedelta(days=6 - (today.weekday() + 1) % 7)
+    else:
+        weeksago = 0
     for i in range(weeksago + 1):
         data = []
         days = (today.weekday() + 1) % 7 + 1
@@ -71,7 +73,8 @@ def graph(weeksago):
                     i += 2
             print(y)
             ax.plot(x, y, label=n, marker='o') 
-            # ax.legend()
-            today += datetime.timedelta(days=7)
+            
+        today += datetime.timedelta(days=7)
+    # ax.legend()
     plt.savefig("./img/a.png", dpi=300)
     plt.clf()
