@@ -39,6 +39,7 @@ def graph(weeksago):
             ]
             for c in childpath:
                 if os.path.exists(c):
+                    print("load {}".format(c))
                     with open(c) as f:
                         d.update(json.load(f))
             print(d)
